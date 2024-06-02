@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Quiz de personagens</h1>
+
+    <h2 id="question"></h3>
+
+    <h2>---------Options-----------</h2>
+        <div>
+            1 - <button type="button" class="alternative" id="options0" value="0"></button>
+        </div>
+        <div>
+            2 - <button type="button" class="alternative" id="options1" value="1"></button>
+        </div>
+        <div>
+            3 - <button type="button" class="alternative" id="options2" value="2"></button>
+        </div>
+        <div>
+            4 - <button type="button" class="alternative" id="options3" value="3"></button>
+        </div>
+        <br>
+        <h3 id="statusAnswer"></h3>
+        
+        <input type="button" id="reload" value="Reload">
+    
+    <script>
+        
+        
+        const questions = [
+            'Qual a capital do Ceará"',
+            "Qual é a capital do Brasil?",
+            "Qual é a capital de Bahia",
+            "Qual é a capital do Pará"
+        ];
+        const options = [
+            ["Brasilia", "Rio de janeiro", "Fortaleza", "Salvador"],
+            ["Rio  de Janeiro", "Brasilia", "Berlim", "Natal"],
+            ["Maranhão", "Ceará", "Salvador", "Terezinha"],
+            ["Salvador","Rio de Janeiro", "São Paulo", "Belém"]
+        ];
+        const correctAnswers = [2,1,2,3];
+        
+        let reloadButton = document.getElementById('reload')
+        reloadButton.style.display = "none";
+        let nowQuestion = Math.floor(Math.random() * questions.length);
+        
+        generateQuestions();
+        selectButton();
+
+        function generateQuestions(){
+            
+            document.getElementById("question").innerHTML = questions[nowQuestion];
+            
+            const optionsContainer = document.querySelectorAll('button');
+            optionsContainer.forEach((element,index) =>{element.textContent = options[nowQuestion][index]});
+            
+        }
+        
+        function selectButton(){
+            const alternatives = document.querySelectorAll('.alternative');
+        
+            alternatives.forEach(button =>{
+                button.addEventListener('click', () => {
+                    const answer = button.value;0 
+                    checkAnswer(answer);
+            })
+        })
+        }
+
+        function checkAnswer(answer){
+            answer = parseInt(answer);
+            let statusAnswer = document.getElementById("statusAnswer");
+            if(answer == correctAnswers[nowQuestion]){
+                statusAnswer.innerHTML = "Acertou!!!"
+            }
+            else{
+                console.log
+                statusAnswer.innerHTML = `Errou meu chapa, resposta correta ${options[nowQuestion][correctAnswers[nowQuestion]]}`
+            }
+            reloadButton.style.display = "block";
+        }
+
+        document.getElementById('reload').addEventListener('click', () => location.reload())
+    </script>
+</body>
+</html>
